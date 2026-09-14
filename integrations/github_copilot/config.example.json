@@ -1,0 +1,14 @@
+{
+  "enabled": false,
+  "provider": "github-copilot",
+  "features": {
+    "completion": true,
+    "explain": true,
+    "review": true,
+    "tests": true,
+    "repository_context": true
+  },
+  "auth": {
+    "mode": "environment_or_github_cli"
+  }
+}
