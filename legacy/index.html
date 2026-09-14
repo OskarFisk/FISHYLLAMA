@@ -1,0 +1,9 @@
+<!doctype html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>FishyLLAMA Legacy Client</title>
+<style>body{background:#08090b;color:#e6e6e6;font:14px Arial,sans-serif;margin:20px}h1{color:#ff604f}#chat{height:55vh;overflow:auto;border:1px solid #444;padding:10px;background:#111}textarea{width:80%;height:70px;background:#08090b;color:#fff;border:1px solid #555}button{padding:10px;margin:5px;background:#ff604f;border:0;color:#fff}pre{white-space:pre-wrap;font:14px Arial}</style></head>
+<body><h1>FISHYLLAMA LEGACY CLIENT</h1><p>Compatibility interface for older browsers and remote systems.</p><div id="chat"></div><textarea id="msg"></textarea><button onclick="send()">SEND</button><button onclick="speak()">VOICE</button>
+<script type="text/javascript">
+function add(w,t){var d=document.createElement('div');d.innerHTML='<b>'+w+':</b><pre>'+String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</pre>';document.getElementById('chat').appendChild(d);document.getElementById('chat').scrollTop=999999;}
+function send(){var x=document.getElementById('msg'),t=x.value;if(!t)return;x.value='';add('YOU',t);var r=new XMLHttpRequest();r.open('POST','/api/chat',true);r.setRequestHeader('Content-Type','application/json');r.onreadystatechange=function(){if(r.readyState==4){try{var d=JSON.parse(r.responseText);add('FISHYLLAMA',d.content||d.detail||r.responseText);window.lastReply=d.content||'';}catch(e){add('ERROR',r.responseText);}}};r.send(JSON.stringify({messages:[{role:'user',content:t}],provider:'auto',model:'auto'}));}
+function speak(){if(window.speechSynthesis&&window.lastReply){var u=new SpeechSynthesisUtterance(window.lastReply);window.speechSynthesis.speak(u);}else add('VOICE','Native browser TTS is unavailable on this browser.');}
+</script></body></html>
