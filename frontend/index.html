@@ -1,1 +1,60 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff4e42" />
+  <title>FISHYLLAMA • OPENCLAW CORE</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="space-background"></div>
+  <div class="grid-overlay"></div>
+  <div class="floating-particles" id="floating-particles"></div>
+  <div class="interface-container">
+    <div class="header"><div class="header-item"></div><div class="header-item"></div></div>
+    <div class="scanner-frame"><div class="corner-tl"></div><div class="corner-tr"></div><div class="corner-bl"></div><div class="corner-br"></div><div class="scanner-id" id="orb-status">READY</div><div class="scanner-id-right" id="orb-meta">AUTO</div></div>
+  </div>
+
+  <div class="data-panel system-status" style="position:absolute;top:20px;left:20px;">
+    <div class="data-panel-title"><span>SYSTEM STATUS</span><span id="model-indicator" class="model-dot">●</span><span id="timestamp">00:00:00</span></div>
+    <div class="status-columns">
+      <div class="status-col status-col-system"><div class="waveform"><canvas id="cpu-canvas" class="waveform-canvas"></canvas></div><div class="data-readouts">
+        <div class="data-row"><span class="data-label">CPU:</span><span class="data-value" id="cpu-value">0%</span></div>
+        <div class="data-row"><span class="data-label">MEMORY:</span><span class="data-value" id="mem-value">0 GB</span></div>
+        <div class="data-row"><span class="data-label">UPTIME:</span><span class="data-value" id="uptime-value">00:00:00</span></div>
+        <div class="data-row"><span class="data-label">PROCESSES:</span><span class="data-value" id="proc-value">0</span></div>
+      </div></div>
+      <div class="status-col status-col-model"><div class="status-divider-v"></div><div class="status-col-inner"><div class="status-section-label">── FISHY CORE ──</div><div class="data-bar"><div class="data-bar-fill" id="context-bar" style="width:0%"></div><span class="data-bar-label" id="context-bar-label">0%</span></div><div class="data-readouts">
+        <div class="data-row"><span class="data-label">MODEL:</span><span class="data-value" id="model-name">AUTO</span></div>
+        <div class="data-row"><span class="data-label">TOKENS OUT:</span><span class="data-value" id="tokens-out">—</span></div>
+        <div class="data-row"><span class="data-label">CONTEXT:</span><span class="data-value" id="context-value">AUTO</span></div>
+      </div></div></div>
+    </div>
+  </div>
+
+  <div class="data-panel info-center" style="position:absolute;top:20px;right:20px;z-index:10;">
+    <div class="panel-header"><span class="data-panel-title">FISHY DATA CENTER</span></div>
+    <div class="tab-bar"><button class="tab-btn-r active" data-rtab="tasks">TASKS</button><button class="tab-btn-r" data-rtab="skills">SKILLS</button><button class="tab-btn-r" data-rtab="memory">MEMORY</button><button class="tab-btn-r" data-rtab="schedule">SCHEDULE</button><button class="tab-btn-r" data-rtab="controls">CONTROLS</button></div>
+    <div class="rtab-content active" id="rtab-tasks"></div><div class="rtab-content" id="rtab-skills"></div><div class="rtab-content" id="rtab-memory"></div><div class="rtab-content" id="rtab-schedule"></div>
+    <div class="rtab-content" id="rtab-controls">
+      <div class="control-group fishy-core-group"><div class="control-row"><span class="control-label">FISHY CORE / MODEL ROUTER</span><span class="control-value" id="fishy-core-status">AUTO</span></div><select id="fishy-provider" class="fishy-select"><option value="auto">AUTO ROUTER</option></select><select id="fishy-model" class="fishy-select"><option value="auto">AUTO MODEL</option></select><label class="fishy-toggle"><input id="fishy-auto-voice" type="checkbox" checked><span>AUTO VOICE</span></label><label class="fishy-toggle"><input id="fishy-local-first" type="checkbox"><span>LOCAL FIRST</span></label></div>
+      <div class="control-group fishy-voice-group"><div class="control-row"><span class="control-label">FISHY VOICE</span><span class="control-value" id="fishy-voice-label">READY</span></div><select id="fishy-voice" class="fishy-select"></select><div class="control-row"><span class="control-label">RATE</span><span class="control-value" id="fishy-rate-value">1.00</span></div><input id="fishy-rate" type="range" min="0.65" max="1.45" step="0.05" value="1" class="slider"><div class="control-row"><span class="control-label">PITCH</span><span class="control-value" id="fishy-pitch-value">0</span></div><input id="fishy-pitch" type="range" min="-10" max="10" step="1" value="0" class="slider"><div class="buttons"><button class="btn" id="fishy-mic">LISTEN</button><button class="btn" id="fishy-stop">STOP VOICE</button></div></div>
+      <div class="control-group"><div class="control-row"><span class="control-label">TTS / VISUALS</span></div><div class="buttons"><button class="btn" id="powersave-btn">ECO</button><button class="btn" id="reset-btn">RESET</button><button class="btn" id="save-btn">SAVE</button></div></div>
+    </div>
+  </div>
+
+  <div class="mobile-toolbar" id="mobile-toolbar"><button class="mobile-toolbar-btn" data-panel="spectrum">♪</button><button class="mobile-toolbar-btn" data-panel="info-center">☷</button></div>
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+
+  <div class="terminal-panel chat-panel">
+    <div class="terminal-header"><span>FISHYLLAMA // OPENCLAW CORE</span><span id="terminal-status">ONLINE</span></div>
+    <div class="terminal-content" id="terminal-content"><div class="terminal-line system-line">FISHY CORE INITIALIZING…</div></div>
+    <div class="chat-input-bar"><input type="text" id="chat-input" class="chat-input" placeholder="TYPE A MESSAGE..." /><button class="btn chat-attach-btn" id="chat-attach">ATTACH</button><button class="btn chat-send-btn" id="chat-send">SEND</button><input type="file" id="chat-file-input" style="display:none" multiple /></div>
+  </div>
+
+  <div class="spectrum-analyzer"><div class="spectrum-header"><span>♪ AUDIO / VOICE CORE</span><canvas id="waveform-canvas" class="waveform-canvas spectrum-waveform"></canvas></div><div class="spectrum-body"><div class="spectrum-content"><canvas id="spectrum-canvas" class="spectrum-canvas"></canvas></div></div></div>
+  <div id="fishy-live-transcript" class="fishy-live-transcript" style="display:none"></div>
+  <script src="/static/fishy-openclaw.js"></script>
+</body>
+</html>
