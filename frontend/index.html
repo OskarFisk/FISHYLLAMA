@@ -1,1 +1,41 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FishyLLAMA</title><link rel="stylesheet" href="/static/style.css"></head><body><main><header><div class="logo">🐟</div><div><h1>FishyLLAMA</h1><span>Multi-model AI core</span></div><select id="provider"><option value="auto">Auto</option><option value="openai">OpenAI</option><option value="deepseek">DeepSeek</option><option value="xai">xAI</option><option value="groq">Groq</option><option value="mistral">Mistral</option><option value="ollama">Ollama</option></select></header><section id="chat"></section><form id="form"><textarea id="input" placeholder="Ask FishyLLAMA anything..." rows="2"></textarea><button>Send ↗</button></form></main><script src="/static/app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050814">
+  <title>FishyLLAMA — Voice AI</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="ambient-grid"></div><div class="scanlines"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="logo-orb"><span>🐟</span></div><div><h1>FishyLLAMA</h1><span>Unified multi-model voice intelligence</span></div></div>
+      <div class="top-actions"><span id="statusDot" class="status online">ONLINE</span><select id="provider" aria-label="AI provider"><option value="auto">AUTO ROUTING</option><option value="openai">OpenAI</option><option value="deepseek">DeepSeek</option><option value="xai">xAI</option><option value="groq">Groq</option><option value="mistral">Mistral</option><option value="ollama">Ollama</option></select><button class="icon-btn" id="settingsButton" title="Voice & interface settings">⚙</button></div>
+    </header>
+
+    <section class="hero-panel">
+      <div class="orb-wrap"><div id="voiceOrb" class="voice-orb"><div class="orb-core">F</div><div class="orb-ring r1"></div><div class="orb-ring r2"></div><div class="orb-ring r3"></div></div><div id="voiceState" class="state-label">READY</div></div>
+      <div class="hero-copy"><div class="eyebrow">VOICE CORE / MULTI-MODEL</div><h2>Talk to <em>FishyLLAMA</em></h2><p>Natural voice, interruptible responses, streaming-ready speech, model routing and a cinematic assistant interface.</p><div class="quick-row"><button id="micButton" class="quick primary">🎙 Start listening</button><button id="stopSpeaking" class="quick">■ Stop speaking</button><button id="clearChat" class="quick">⌫ Clear</button></div></div>
+      <div class="telemetry"><div><span>ENGINE</span><b id="engineLabel">AUTO</b></div><div><span>VOICE</span><b id="voiceLabel">FISHY NEURAL</b></div><div><span>MODE</span><b id="modeLabel">CHAT</b></div></div>
+    </section>
+
+    <section id="chat" class="chat"></section>
+    <div id="liveTranscript" class="live-transcript" aria-live="polite"></div>
+
+    <form id="form" class="composer"><button type="button" id="micButton2" class="mic-mini">●</button><textarea id="input" placeholder="Ask FishyLLAMA anything…  •  Enter to send  •  Shift+Enter for a new line" rows="2"></textarea><button class="send" aria-label="Send">Send <span>↗</span></button></form>
+    <footer><span>FishyLLAMA Voice Core</span><span>Web Speech fallback • Optional cloud/local TTS</span></footer>
+  </main>
+
+  <aside id="settingsPanel" class="settings-panel" aria-hidden="true">
+    <div class="settings-head"><div><small>CONTROL CENTER</small><h3>Voice & Interface</h3></div><button id="closeSettings" class="icon-btn">×</button></div>
+    <label>Voice profile<select id="voiceSelect"></select></label>
+    <label>Speech rate <output id="voiceRateValue">1.02×</output><input id="voiceRate" type="range" min="0.5" max="2" step="0.01" value="1.02"></label>
+    <label>Pitch <output id="voicePitchValue">0.00</output><input id="voicePitch" type="range" min="-0.5" max="0.5" step="0.01" value="0"></label>
+    <label>Volume <output id="voiceVolumeValue">100%</output><input id="voiceVolume" type="range" min="0" max="1" step="0.01" value="1"></label>
+    <label class="toggle"><span>Voice responses</span><input id="voiceEnabled" type="checkbox" checked><i></i></label>
+    <div class="feature-list"><span>✓ Sentence-aware streaming</span><span>✓ Interrupt / stop speech</span><span>✓ URL & code speech cleanup</span><span>✓ Microphone auto-calibration</span><span>✓ Listening / thinking / searching cues</span><span>✓ System voice fallback, no API key</span></div>
+  </aside><div id="backdrop" class="backdrop"></div>
+  <script src="/static/voice.js"></script><script src="/static/app.js"></script>
+</body>
+</html>
