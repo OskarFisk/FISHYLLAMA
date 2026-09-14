@@ -1,0 +1,14 @@
+services:
+  fishyllama:
+    build: .
+    container_name: fishyllama
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - fishyllama_data:/app/data
+
+volumes:
+  fishyllama_data:
